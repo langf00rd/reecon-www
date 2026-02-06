@@ -3,6 +3,7 @@
 import { SIDEBAR_MENU } from "@/lib/routes";
 import { Search } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Input } from "../ui/input";
 import {
   SidebarContent,
@@ -17,6 +18,7 @@ import {
 
 export default function AppSidebarContent() {
   const { open } = useSidebar();
+  const pathname = usePathname();
   return (
     <SidebarContent className="px-2 justify-between">
       <div className="space-y-4">
@@ -39,11 +41,11 @@ export default function AppSidebarContent() {
         )}
         <SidebarMenu>
           {SIDEBAR_MENU.main.map((a) => (
-            <SidebarMenuItem key={a.label}>
+            <SidebarMenuItem key={a.label} className={`${open && "px-2"}`}>
               <SidebarMenuButton asChild tooltip={a.label}>
                 <Link
                   href={!a.enabled ? "#" : a.url}
-                  className={`text-[#626262] font-[450] ${open && "px-4"} ${!a.enabled && "opacity-40 cursor-not-allowed"}`}
+                  className={`text-[#626262] font-[450]  ${!a.enabled && "opacity-40 cursor-not-allowed"} ${pathname === a.url && "bg-background text-primary shadow border"}`}
                 >
                   <a.icon />
                   <span className="ml-1">{a.label}</span>

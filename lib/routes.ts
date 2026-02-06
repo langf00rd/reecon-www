@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 
 export const ROUTES = {
+  index: "/",
   dataSource: "/data-sources",
   reportsAudit: "/reports",
   settings: "/settings",

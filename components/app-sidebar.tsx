@@ -1,31 +1,12 @@
-import {
-  Sidebar,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
-import { Logo } from "./logo";
+import { Sidebar } from "@/components/ui/sidebar";
 import AppSidebarContent from "./sidebar/content";
+import AppSidebarHeader from "./sidebar/header";
 import { AppSidebarUser } from "./sidebar/user";
 
 export function AppSidebar() {
   return (
     <Sidebar variant="floating" collapsible="icon">
-      <SidebarHeader>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              size="lg"
-              className="data-[state=open]:bg-sidebar-accent w-full justify-between data-[state=open]:text-sidebar-accent-foreground"
-            >
-              <Logo />
-              <SidebarTrigger />
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarHeader>
+      <AppSidebarHeader />
       <AppSidebarContent />
       <AppSidebarUser
         user={{
