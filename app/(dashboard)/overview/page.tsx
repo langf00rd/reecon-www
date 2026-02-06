@@ -1,9 +1,12 @@
+import Header from "@/components/header";
+
 export default function Home() {
   return (
-    <div>
-      <header>
-        <h1 className="text-3xl">Welcome, Langford</h1>
-      </header>
-    </div>
+    <>
+      <Header title="Welcome, Langford" />
+      <div className="w-full h-full flex items-center justify-center">
+        Coming Soon...
+      </div>
+    </>
   );
 }

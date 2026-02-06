@@ -1,0 +1,9 @@
+import Header from "@/components/header";
+
+export default async function Page() {
+  return (
+    <div>
+      <Header title="Reconciliation" />
+    </div>
+  );
+}

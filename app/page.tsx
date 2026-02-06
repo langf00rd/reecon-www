@@ -1,3 +1,4 @@
+import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ChevronRight } from "lucide-react";
@@ -8,8 +9,10 @@ export default function Home() {
   return (
     <main className="md:max-w-[90vw] flex flex-col justify-between md:h-screen md:border-x mx-auto">
       <header className="md:flex items-center hidden justify-between p-10 pb-0">
-        <h3 className="flex-1">reconn</h3>
-        <nav className="flex-2 md:max-w-[500px]">
+        <div className="flex gap-2">
+          <Logo size={40} />
+        </div>
+        <nav className="flex-2 md:max-w-125">
           <ul className="flex items-center justify-between">
             {["company", "pricing", "terms", "privacy", "contact"].map(
               (item, index) => (
@@ -25,7 +28,7 @@ export default function Home() {
         </nav>
       </header>
 
-      <div className="md:max-w-[900px] space-y-4 p-10">
+      <div className="md:max-w-225 space-y-4 p-10">
         <h1 className="text-2xl md:text-[52px]">
           Reconciliation Minus the Chaos
         </h1>
@@ -47,16 +50,15 @@ export default function Home() {
       <div className="flex flex-col md:flex-row items-start gap-20 space-evenly mx-auto p-10">
         <div className="flex-1">
           <p className="md:text-xl">
-            Most fintech teams waste hours every day manually checking
-            transactions across banks, telcos, and payment providers. We’re
-            building a lean reconciliation platform that centralizes your data,
-            catches mismatches early, and gives your team control back.
+            <Balancer>
+              Most fintech teams waste hours every day manually checking
+              transactions across banks, telcos, and payment providers. We’re
+              building a lean reconciliation platform that centralizes your
+              data, catches mismatches early, and gives your team control back.
+            </Balancer>
           </p>
         </div>
         <div className="flex-1">
-          <h3 className="md:text-xl mb-2 border-b w-fit border-b-black">
-            Key Benefits
-          </h3>
           <ol className="list-inside list-disc md:text-xl space-y-1">
             <li>Built for auditability, security, and privacy</li>
             <li>Single of truth for internal and provider transactions</li>

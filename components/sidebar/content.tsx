@@ -2,6 +2,7 @@
 
 import { SIDEBAR_MENU } from "@/lib/routes";
 import { Search } from "lucide-react";
+import Link from "next/link";
 import { Input } from "../ui/input";
 import {
   SidebarContent,
@@ -37,32 +38,32 @@ export default function AppSidebarContent() {
           </SidebarGroup>
         )}
         <SidebarMenu>
-          {SIDEBAR_MENU.main.map((project) => (
-            <SidebarMenuItem key={project.label}>
-              <SidebarMenuButton asChild>
-                <a
-                  href={project.url}
-                  className={`text-[#626262] font-[450] ${open && "px-4"}`}
+          {SIDEBAR_MENU.main.map((a) => (
+            <SidebarMenuItem key={a.label}>
+              <SidebarMenuButton asChild tooltip={a.label}>
+                <Link
+                  href={!a.enabled ? "#" : a.url}
+                  className={`text-[#626262] font-[450] ${open && "px-4"} ${!a.enabled && "opacity-40 cursor-not-allowed"}`}
                 >
-                  <project.icon />
-                  <span className="ml-1">{project.label}</span>
-                </a>
+                  <a.icon />
+                  <span className="ml-1">{a.label}</span>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
         </SidebarMenu>
       </div>
       <SidebarMenu className="border-b pb-2">
-        {SIDEBAR_MENU.secondaryNav.map((project) => (
-          <SidebarMenuItem key={project.label}>
-            <SidebarMenuButton asChild>
-              <a
-                href={project.url}
+        {SIDEBAR_MENU.secondaryNav.map((a) => (
+          <SidebarMenuItem key={a.label}>
+            <SidebarMenuButton asChild tooltip={a.label}>
+              <Link
+                href={a.url}
                 className={`text-[#626262] font-[450] ${open && "px-4"}`}
               >
-                <project.icon />
-                <span className="ml-1">{project.label}</span>
-              </a>
+                <a.icon />
+                <span className="ml-1">{a.label}</span>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         ))}
