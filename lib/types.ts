@@ -10,7 +10,7 @@ export interface CanonicalTransaction {
   upload_by?: string; // user id
   source_type?: TransactionType;
   source_name?: string; // MTN, Bank X, ...
-  reference?: string;
+  reference: string;
   raw?: Record<string, unknown>;
 }
 

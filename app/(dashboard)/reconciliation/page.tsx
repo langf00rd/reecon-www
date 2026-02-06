@@ -8,11 +8,14 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Empty, EmptyContent, EmptyTitle } from "@/components/ui/empty";
+import { useAppContext } from "@/hooks/use-app-context";
 import { reconcile } from "@/lib/engine/reconcile";
 import { TransactionType } from "@/lib/enums";
+import { ROUTES } from "@/lib/routes";
 import { CanonicalTransaction } from "@/lib/types";
 import { buildColumns, readExcelFile } from "@/lib/utils";
 import { RefreshCcw, Trash2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { toast } from "sonner";
 
@@ -22,6 +25,8 @@ interface FileContent {
 }
 
 export default function Page() {
+  const { setReconResult } = useAppContext();
+  const router = useRouter();
   const internalFilePickerRef = useRef<HTMLInputElement>(null);
   const providerFilePickerRef = useRef<HTMLInputElement>(null);
   const [filesContent, setFilesContent] = useState({
@@ -73,7 +78,9 @@ export default function Page() {
     const internalData = normalizedData.internal;
     const providerData = normalizedData.provider;
     const reconResult = reconcile(internalData, providerData);
+    setReconResult(reconResult);
     console.log(reconResult);
+    router.push(ROUTES.exceptions);
   }
 
   return (

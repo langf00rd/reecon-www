@@ -59,7 +59,7 @@ export const SIDEBAR_MENU = {
       label: "Exceptions",
       url: ROUTES.exceptions,
       icon: ShieldAlert,
-      enabled: false,
+      enabled: true,
     },
     {
       label: "Reports & Audit",
