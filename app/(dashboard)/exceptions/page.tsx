@@ -161,28 +161,33 @@ export default function Home() {
                   <HoverCard openDelay={100} closeDelay={200}>
                     <HoverCardTrigger>
                       <p className="flex cursor-help items-center gap-1">
-                        {item.rule}{" "}
+                        {
+                          DEFAULT_RECON_RULES.find(
+                            (rule) => rule.id === item.rule,
+                          )?.name
+                        }
                         <HelpCircle size={14} className="opacity-50" />
                       </p>
                     </HoverCardTrigger>
                     <HoverCardContent>
-                      {(() => {
-                        const rule = DEFAULT_RECON_RULES.find(
+                      {
+                        DEFAULT_RECON_RULES.find(
                           (rule) => rule.id === item.rule,
-                        );
-                        return (
-                          <div className="space-y-2">
-                            <h3>{rule?.name}</h3>
-                            <p>{rule?.description}</p>
-                          </div>
-                        );
-                      })()}
+                        )?.description
+                      }
                     </HoverCardContent>
                   </HoverCard>
                 </div>
               )}
             </CardContent>
-            <CardFooter className="justify-end">
+            <CardFooter className="justify-end gap-2">
+              <ButtonPopover
+                buttonProps={{
+                  variant: "outline",
+                }}
+                label="Export"
+                items={[]}
+              />
               <Button variant="outline">
                 Mark as Resolved
                 <Check />
