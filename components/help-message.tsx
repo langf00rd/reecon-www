@@ -1,12 +1,20 @@
-import { Info } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
 
-export default function HelpMessage(props: { children: ReactNode }) {
+export default function HelpMessage(props: {
+  children: ReactNode;
+  className?: string;
+}) {
   return (
-    <p className="flex items-start bg-neutral-200/40 border p-2 px-3 rounded-sm gap-2">
-      <div className="relative top-1">
+    <p
+      className={cn(
+        "flex items-start bg-neutral-200/40 font-medium border p-1.5 px-2 rounded-md gap-2",
+        props.className,
+      )}
+    >
+      {/*<div className="relative top-1">
         <Info size={16} />
-      </div>
+      </div>*/}
       {props.children}
     </p>
   );

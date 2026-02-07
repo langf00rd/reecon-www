@@ -18,7 +18,6 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -30,7 +29,7 @@ import {
 import { useAppContext } from "@/hooks/use-app-context";
 import { RECON_STATUS_DEFS } from "@/lib/content";
 import { ReconResultStatus } from "@/lib/enums";
-import { Check, HelpCircle, Search } from "lucide-react";
+import { Check, HelpCircle } from "lucide-react";
 import { useState } from "react";
 
 export default function Home() {
@@ -90,13 +89,6 @@ export default function Home() {
             </SelectContent>
           </Select>
         </div>
-        <div>
-          <Input
-            className="bg-white w-100"
-            placeholder="Search..."
-            prefixIcon={<Search size={12} />}
-          />
-        </div>
       </div>
 
       <HelpMessage>{RECON_STATUS_DEFS[selectedStatus]}</HelpMessage>
@@ -112,7 +104,7 @@ export default function Home() {
         </Empty>
       )}
 
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         {groupedReconResults?.[selectedStatus]?.map((item, index) => (
           <Card key={index}>
             <CardContent className="flex flex-col h-full gap-4 justify-between">

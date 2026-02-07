@@ -66,6 +66,7 @@ export default function ReconRuleDialog(props: { children: ReactNode }) {
     setOpen(false);
     setConditions([]);
     setCurrentCondition(null);
+    toast.success("Rule created successfully");
   }
 
   function handleAddCondition() {

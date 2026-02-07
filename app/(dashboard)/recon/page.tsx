@@ -4,7 +4,9 @@ import ButtonPopover from "@/components/button-popover";
 import { HorizontalDashedLine } from "@/components/dashed-line";
 import { DataTable } from "@/components/data-table";
 import NormalizationDialog from "@/components/dialogs/normalization";
+import ReconRuleDialog from "@/components/dialogs/rule";
 import Header from "@/components/header";
+import HelpMessage from "@/components/help-message";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -20,7 +22,7 @@ import { TransactionType } from "@/lib/enums";
 import { ROUTES } from "@/lib/routes";
 import { CanonicalTransaction } from "@/lib/types";
 import { buildColumns, readExcelFile } from "@/lib/utils";
-import { RefreshCcw, SpellCheck } from "lucide-react";
+import { PlusIcon, RefreshCcw, SpellCheck } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { toast } from "sonner";
@@ -77,6 +79,12 @@ export default function Page() {
 
   function handleRunRecon() {
     try {
+      if (enabledReconRules.length === 0) {
+        toast.error(
+          "Please create and enable at least one rule to run this recon job",
+        );
+        return;
+      }
       if (
         normalizedData.internal.length === 0 ||
         normalizedData.provider.length === 0
@@ -162,7 +170,20 @@ export default function Page() {
       />
 
       <div className="space-y-10">
-        {allFilesSelected && (
+        {allFilesSelected && enabledReconRules.length === 0 && (
+          <HelpMessage className="bg-destructive/5 items-center justify-between text-destructive/60 border-destructive/5">
+            No recon rules created. Please create and enable at least one rule
+            to run this recon job
+            <ReconRuleDialog>
+              <Button variant="secondary">
+                <PlusIcon />
+                New rule
+              </Button>
+            </ReconRuleDialog>
+          </HelpMessage>
+        )}
+
+        {allFilesSelected && enabledReconRules.length > 0 && (
           <div className="space-y-2">
             <h2>Recon rules: </h2>
             <div className="flex items-center">
