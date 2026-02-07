@@ -11,7 +11,7 @@ export default function ButtonPopover(props: {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button className="pr-0 bg-black" {...props.buttonProps}>
+        <Button className="pr-0" {...props.buttonProps}>
           {props.label}
           <span className="border-l border-l-white/40 px-2 flex items-center justify-center">
             <ChevronDown />
