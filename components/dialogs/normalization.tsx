@@ -64,7 +64,9 @@ export default function NormalizationDialog(props: {
         <form className="space-y-4">
           {Object.keys(canonicalTransaction).map((key) => (
             <div key={key} className="space-y-4">
-              <label className="capitalize">{key.replaceAll("_", " ")}</label>
+              <label className="capitalize">
+                {key.replaceAll("_", " ").replace("dt", "timestamp")}
+              </label>
               <Select onValueChange={(a) => setMap({ ...map, [key]: a })}>
                 <SelectTrigger className="w-full bg-white">
                   <SelectValue placeholder="Select field" />
