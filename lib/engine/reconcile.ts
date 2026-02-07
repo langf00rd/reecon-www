@@ -55,7 +55,7 @@ export function reconcile(
           internal: internalTx,
           provider: providerTx,
           status: ReconResultStatus.MATCHED,
-          rule: rule.name,
+          rule: rule.id,
         });
         matched = true;
         break;
@@ -65,7 +65,7 @@ export function reconcile(
         results.push({
           internal: internalTx,
           status: ReconResultStatus.AMBIGUOUS,
-          rule: rule.name,
+          rule: rule.id,
         });
         matched = true;
         break;

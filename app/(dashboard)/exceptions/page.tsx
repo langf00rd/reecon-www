@@ -34,7 +34,7 @@ import { Check, HelpCircle, Info, Search } from "lucide-react";
 import { useState } from "react";
 
 export default function Home() {
-  const { groupedReconResults } = useAppContext();
+  const { groupedReconResults, reconRules } = useAppContext();
   const statuses = Object.values(ReconResultStatus);
 
   const [selectedStatus, setSelectedStatus] = useState<ReconResultStatus>(
@@ -155,6 +155,7 @@ export default function Home() {
                 )}
               </div>
               <HorizontalDashedLine />
+
               {item.rule && (
                 <div className="space-y-3">
                   <h3 className="uppercase text-foreground/70!">RULE</h3>
@@ -162,7 +163,7 @@ export default function Home() {
                     <HoverCardTrigger>
                       <p className="flex cursor-help items-center gap-1">
                         {
-                          DEFAULT_RECON_RULES.find(
+                          [...DEFAULT_RECON_RULES, ...reconRules].find(
                             (rule) => rule.id === item.rule,
                           )?.name
                         }
@@ -171,7 +172,7 @@ export default function Home() {
                     </HoverCardTrigger>
                     <HoverCardContent>
                       {
-                        DEFAULT_RECON_RULES.find(
+                        [...DEFAULT_RECON_RULES, ...reconRules].find(
                           (rule) => rule.id === item.rule,
                         )?.description
                       }
