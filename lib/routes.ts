@@ -16,12 +16,12 @@ export const ROUTES = {
   dataSource: "/data-sources",
   reportsAudit: "/reports",
   settings: "/settings",
-  reconciliation: "/reconciliation",
+  reconciliation: "/recon",
   exceptions: "/exceptions",
   support: "/support",
   docs: "/docs",
   overview: "/overview",
-  reconciliationRule: "/reconciliation/rules",
+  reconciliationRule: "/recon/rules",
 };
 
 export const SIDEBAR_MENU: AppSidebarMenu = {

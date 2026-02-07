@@ -193,7 +193,7 @@ export default function Page() {
                   </Button>*/}
                 </div>
               </CardHeader>
-              <CardContent className="border-t -mt-6 pt-5">
+              <CardContent className="border-t -mt-4 pt-5">
                 <DataTable
                   data={content.data}
                   columns={buildColumns(content.data)}

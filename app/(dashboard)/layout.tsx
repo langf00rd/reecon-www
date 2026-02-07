@@ -10,14 +10,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <ResponsivenessProvider>
       <SidebarProvider>
-        <AppProvider>
-          <AppSidebar />
-          <Toaster />
-          <main className="w-full overflow-y-scroll h-screen p-10">
-            <TooltipProvider>{children}</TooltipProvider>
-          </main>
-          <HelpSidebar />
-        </AppProvider>
+        <TooltipProvider>
+          <AppProvider>
+            <AppSidebar />
+            <Toaster />
+            <main className="relative w-full overflow-y-scroll h-screen p-10">
+              {children}
+            </main>
+            <HelpSidebar />
+          </AppProvider>
+        </TooltipProvider>
       </SidebarProvider>
     </ResponsivenessProvider>
   );

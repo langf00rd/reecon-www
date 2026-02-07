@@ -8,7 +8,7 @@ import { Balancer } from "react-wrap-balancer";
 export default function Home() {
   return (
     <main className="md:max-w-[90vw] flex flex-col justify-between md:h-screen md:border-x mx-auto">
-      <header className="md:flex items-center hidden justify-between p-10 pb-0">
+      <header className="md:flex items-center hidden justify-between p-5 md:p-10 pb-0">
         <div className="flex gap-2">
           <Logo size={40} />
         </div>
@@ -28,7 +28,7 @@ export default function Home() {
         </nav>
       </header>
 
-      <div className="md:max-w-225 space-y-4 p-10">
+      <div className="md:max-w-225 space-y-4 p-5 md:p-10">
         <h1 className="text-2xl md:text-[52px]">
           Reconciliation Minus the Chaos
         </h1>
@@ -47,7 +47,7 @@ export default function Home() {
         </Link>
       </div>
 
-      <div className="flex flex-col md:flex-row items-start gap-20 space-evenly mx-auto p-10">
+      <div className="flex flex-col md:flex-row items-start gap-20 space-evenly mx-auto p-5 md:p-10">
         <div className="flex-1">
           <p className="md:text-xl">
             <Balancer>
@@ -68,13 +68,8 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="md:border-y p-10">
-        <h3 className="md:text-xl font-medium! mb-4">
-          Join the Early Access List{" "}
-          <span className="block md:inline md:text-xl opacity-50 font-normal">
-            (Only limited spots available)
-          </span>
-        </h3>
+      <div className="md:border-y p-5 md:p-10">
+        <h3 className="md:text-xl font-medium! mb-4">Join the Early Access</h3>
         <form className="flex gap-2 items-center md:max-w-125">
           <Input
             required

@@ -1,3 +1,4 @@
+import { ReconRuleOperator } from "../enums";
 import { CanoniCalReconRule, ReconRule } from "../types";
 
 const EXACT_RULE: ReconRule = {
@@ -49,9 +50,17 @@ export const DEFAULT_RECON_RULES: CanoniCalReconRule[] = [
     priority: 1,
     enabled: true,
     conditions: [
-      { left: "reference", operator: "EQUALS", right: "reference" },
-      { left: "amount", operator: "EQUALS", right: "amount" },
-      { left: "currency", operator: "EQUALS", right: "currency" },
+      {
+        left: "reference",
+        operator: ReconRuleOperator.EQUALS,
+        right: "reference",
+      },
+      { left: "amount", operator: ReconRuleOperator.EQUALS, right: "amount" },
+      {
+        left: "currency",
+        operator: ReconRuleOperator.EQUALS,
+        right: "currency",
+      },
     ],
   },
   {
@@ -61,8 +70,12 @@ export const DEFAULT_RECON_RULES: CanoniCalReconRule[] = [
     priority: 3,
     enabled: true,
     conditions: [
-      { left: "currency", operator: "EQUALS", right: "currency" },
-      { left: "amount", operator: "ABS_DIFF_LTE", value: 1.0 },
+      {
+        left: "currency",
+        operator: ReconRuleOperator.EQUALS,
+        right: "currency",
+      },
+      { left: "amount", operator: ReconRuleOperator.ABS_DIFF_LTE, value: 1.0 },
     ],
   },
 ];

@@ -7,6 +7,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Switch } from "@/components/ui/switch";
 import { ReconRuleOperator } from "@/lib/enums";
 import { CanonicalTransaction } from "@/lib/types";
 import { ReactNode } from "react";
@@ -43,8 +44,12 @@ export default function ReconRuleDialog(props: { children: ReactNode }) {
             <Input className="bg-white" />
           </fieldset>
           <fieldset>
-            <label>Description</label>
+            <Label>Description</Label>
             <Textarea className="bg-white" />
+          </fieldset>
+          <fieldset className="flex items-center gap-2">
+            <Label>Enable</Label>
+            <Switch />
           </fieldset>
           <fieldset>
             <Label>Conditions</Label>

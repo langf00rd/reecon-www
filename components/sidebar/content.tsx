@@ -47,7 +47,7 @@ export default function AppSidebarContent() {
             </SidebarGroupContent>
           </SidebarGroup>
         )}
-        <SidebarMenu>
+        <SidebarMenu className="space-y-2">
           {SIDEBAR_MENU.main.map((a) =>
             a.children ? (
               <Collapsible key={a.label} className="group/collapsible">
@@ -56,7 +56,7 @@ export default function AppSidebarContent() {
                     <SidebarMenuButton asChild tooltip={a.label}>
                       <Link
                         href={!a.enabled ? "#" : a.url}
-                        className={`text-[#626262] font-[450]  ${!a.enabled && "opacity-40 cursor-not-allowed"} ${pathname === a.url && "bg-background text-primary shadow border"}`}
+                        className={`font-[450]  ${!a.enabled && "opacity-40 cursor-not-allowed"} ${pathname === a.url ? "bg-background text-primary! shadow border" : "text-[#626262]"}`}
                       >
                         <a.icon />
                         <span className="ml-1">{a.label}</span>
@@ -69,7 +69,10 @@ export default function AppSidebarContent() {
                       {a.children?.map((subItem) => (
                         <SidebarMenuSubItem key={subItem.label}>
                           <SidebarMenuSubButton asChild>
-                            <Link href={subItem.url}>
+                            <Link
+                              href={subItem.url}
+                              className={`${pathname === subItem.url ? "bg-background text-primary! shadow border" : "text-[#626262]"}`}
+                            >
                               <subItem.icon />
                               <span>{subItem.label}</span>
                             </Link>
@@ -85,7 +88,7 @@ export default function AppSidebarContent() {
                 <SidebarMenuButton asChild tooltip={a.label}>
                   <Link
                     href={!a.enabled ? "#" : a.url}
-                    className={`text-[#626262] font-[450]  ${!a.enabled && "opacity-40 cursor-not-allowed"} ${pathname === a.url && "bg-background text-primary shadow border"}`}
+                    className={`font-[450]  ${!a.enabled && "opacity-40 cursor-not-allowed"} ${pathname === a.url ? "bg-background text-primary! shadow border" : "text-[#626262]"}`}
                   >
                     <a.icon />
                     <span className="ml-1">{a.label}</span>
@@ -100,10 +103,7 @@ export default function AppSidebarContent() {
         {SIDEBAR_MENU.secondary.map((a) => (
           <SidebarMenuItem key={a.label}>
             <SidebarMenuButton asChild tooltip={a.label}>
-              <Link
-                href={a.url}
-                className={`text-[#626262] font-[450] ${open && "px-4"}`}
-              >
+              <Link href={a.url} className={`font-[450] ${open && "px-4"}`}>
                 <a.icon />
                 <span className="ml-1">{a.label}</span>
               </Link>
