@@ -22,10 +22,12 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useAppContext } from "@/hooks/use-app-context";
 import { DEFAULT_RECON_RULES } from "@/lib/engine/rules";
 import { HelpCircle, PlusIcon, SquareFunction } from "lucide-react";
 
 export default function Page() {
+  const { reconRules } = useAppContext();
   return (
     <>
       <Header
@@ -41,14 +43,16 @@ export default function Page() {
       />
       <div className="space-y-8 flex min-h-[90%] flex-col items-center">
         <div className="absolute left-[50%] w-px h-[80vh] flex-1 border border-dashed" />
-        {DEFAULT_RECON_RULES.map((rule, index) => (
+        {[...DEFAULT_RECON_RULES, ...reconRules].map((rule, index) => (
           <Card key={index} className="relative w-125">
             <CardContent>
               <CardHeader>
                 <CardTitle>{rule.name}</CardTitle>
                 <CardDescription>{rule.description}</CardDescription>
                 <CardAction>
-                  <Badge>{rule.enabled ? "Enabled" : "Disabled"}</Badge>
+                  <Badge variant={rule.enabled ? "default" : "destructive"}>
+                    {rule.enabled ? "Enabled" : "Disabled"}
+                  </Badge>
                 </CardAction>
               </CardHeader>
               <CardContent className="mt-2">

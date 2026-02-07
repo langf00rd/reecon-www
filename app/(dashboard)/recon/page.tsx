@@ -9,7 +9,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Empty, EmptyContent, EmptyTitle } from "@/components/ui/empty";
 import { useAppContext } from "@/hooks/use-app-context";
-import { reconcile } from "@/lib/engine/reconcile";
+import {
+  convertCanonicalReconRulesToReconRules,
+  reconcile,
+} from "@/lib/engine/reconcile";
 import { TransactionType } from "@/lib/enums";
 import { ROUTES } from "@/lib/routes";
 import { CanonicalTransaction } from "@/lib/types";
@@ -26,7 +29,7 @@ interface FileContent {
 
 export default function Page() {
   const router = useRouter();
-  const { setReconResult } = useAppContext();
+  const { setReconResult, reconRules } = useAppContext();
   const internalFilePickerRef = useRef<HTMLInputElement>(null);
   const providerFilePickerRef = useRef<HTMLInputElement>(null);
   const [filesContent, setFilesContent] = useState({
@@ -81,7 +84,11 @@ export default function Page() {
     }
     const internalData = normalizedData.internal;
     const providerData = normalizedData.provider;
-    const reconResult = reconcile(internalData, providerData);
+    const reconResult = reconcile(
+      internalData,
+      providerData,
+      convertCanonicalReconRulesToReconRules(reconRules),
+    );
     setReconResult(reconResult);
     router.push(ROUTES.exceptions);
   }
@@ -207,7 +214,9 @@ export default function Page() {
       {!allFilesSelected && (
         <Empty>
           <EmptyContent>
-            <EmptyTitle>Upload files to start reconciliation</EmptyTitle>
+            <EmptyTitle>
+              Upload both internal and provider files to start reconciliation
+            </EmptyTitle>
           </EmptyContent>
         </Empty>
       )}

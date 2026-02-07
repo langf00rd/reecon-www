@@ -1,7 +1,7 @@
 "use client";
 
 import { ReconResultStatus } from "@/lib/enums";
-import { ReconResult } from "@/lib/types";
+import { CanonicalReconRule, ReconResult } from "@/lib/types";
 import { createContext, ReactNode, useState } from "react";
 
 export const AppContext = createContext<ReturnType<
@@ -9,15 +9,14 @@ export const AppContext = createContext<ReturnType<
 > | null>(null);
 
 const useAppContextValue = () => {
+  const [reconRules, setReconRules] = useState<CanonicalReconRule[]>([]);
   const [reconResult, setReconResult] = useState<ReconResult[] | null>([]);
 
   function getGroupedReconResults() {
     const grouped = reconResult?.reduce(
       (acc, item) => {
         const key = item.status;
-        if (!acc[key]) {
-          acc[key] = [];
-        }
+        if (!acc[key]) acc[key] = [];
         acc[key].push(item);
         return acc;
       },
@@ -30,6 +29,8 @@ const useAppContextValue = () => {
     reconResult,
     setReconResult,
     groupedReconResults: getGroupedReconResults(),
+    reconRules,
+    setReconRules,
   };
 };
 

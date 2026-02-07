@@ -26,22 +26,22 @@ export interface XlsxResult {
   [key: string]: Record<string, unknown>[];
 }
 
-export interface ReconRule extends Partial<CanoniCalReconRule> {
+export interface ReconRule extends Partial<CanonicalReconRule> {
   formula?: string;
   buildKey: (tx: CanonicalTransaction) => string | null;
   match: (a: CanonicalTransaction, b: CanonicalTransaction) => boolean;
 }
 
-export interface CanoniCalReconRule {
+export interface CanonicalReconRule {
   id: string;
   name: string;
   description?: string;
   priority: number;
   enabled: boolean;
-  conditions: RuleCondition[];
+  conditions: CanonicalReconRuleCondition[];
 }
 
-interface RuleCondition {
+export interface CanonicalReconRuleCondition {
   left: keyof CanonicalTransaction;
   operator: ReconRuleOperator;
   right?: keyof CanonicalTransaction;

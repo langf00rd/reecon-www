@@ -1,5 +1,5 @@
 import { ReconRuleOperator } from "../enums";
-import { CanoniCalReconRule, ReconRule } from "../types";
+import { CanonicalReconRule, ReconRule } from "../types";
 
 const EXACT_RULE: ReconRule = {
   name: "exact_reference_amount_currency",
@@ -42,7 +42,7 @@ export const RECON_RULES: ReconRule[] = [
   TOLERANT_AMOUNT_RULE,
 ];
 
-export const DEFAULT_RECON_RULES: CanoniCalReconRule[] = [
+export const DEFAULT_RECON_RULES: CanonicalReconRule[] = [
   {
     id: "exact_reference_amount_currency",
     name: "Exact reference, amount, and currency",

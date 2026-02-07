@@ -1,5 +1,10 @@
-import { ReconResultStatus } from "../enums";
-import { CanonicalTransaction, ReconResult, ReconRule } from "../types";
+import { ReconResultStatus, ReconRuleOperator } from "../enums";
+import {
+  CanonicalReconRule,
+  CanonicalTransaction,
+  ReconResult,
+  ReconRule,
+} from "../types";
 import { RECON_RULES } from "./rules";
 
 export function reconcile(
@@ -86,4 +91,79 @@ export function reconcile(
   }
 
   return results;
+}
+
+export function convertCanonicalReconRulesToReconRules(
+  canonicalRules: CanonicalReconRule[],
+): ReconRule[] {
+  return canonicalRules.map((rule) => ({
+    ...rule,
+    buildKey: (tx: CanonicalTransaction): string | null => {
+      // build a unique key based on the rule's conditions
+      const keyParts: string[] = [];
+      for (const condition of rule.conditions) {
+        const leftValue = tx[condition.left];
+        // skip if the required field is missing
+        if (leftValue === undefined || leftValue === null) {
+          return null;
+        }
+        keyParts.push(String(leftValue));
+      }
+
+      return keyParts.length > 0 ? keyParts.join("|") : null;
+    },
+
+    match: (a: CanonicalTransaction, b: CanonicalTransaction): boolean => {
+      // Check if all conditions match between transactions a and b
+      return rule.conditions.every((condition) => {
+        const leftValueA = a[condition.left];
+
+        // get the comparison value for transaction b
+        let compareValue: any;
+        if (condition.right !== undefined) {
+          compareValue = b[condition.right];
+        } else if (condition.value !== undefined) {
+          compareValue = condition.value;
+        } else {
+          return false;
+        }
+
+        // apply the operator
+        switch (condition.operator) {
+          // case "==":
+          case ReconRuleOperator.EQUALS:
+            return leftValueA == compareValue;
+          // case "===":
+          // case "strictEquals":
+          //   return leftValueA === compareValue;
+          // case "!=":
+          // case "notEquals":
+          //   return leftValueA != compareValue;
+          // case "!==":
+          // case "strictNotEquals":
+          //   return leftValueA !== compareValue;
+          // case ">":
+          // case "greaterThan":
+          //   return Number(leftValueA) > Number(compareValue);
+          // case ">=":
+          // case "greaterThanOrEqual":
+          //   return Number(leftValueA) >= Number(compareValue);
+          // case "<":
+          // case "lessThan":
+          //   return Number(leftValueA) < Number(compareValue);
+          // case "<=":
+          // case "lessThanOrEqual":
+          //   return Number(leftValueA) <= Number(compareValue);
+          // case "contains":
+          //   return String(leftValueA).includes(String(compareValue));
+          // case "startsWith":
+          //   return String(leftValueA).startsWith(String(compareValue));
+          // case "endsWith":
+          //   return String(leftValueA).endsWith(String(compareValue));
+          default:
+            return false;
+        }
+      });
+    },
+  }));
 }
