@@ -17,13 +17,13 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import { Empty, EmptyContent, EmptyTitle } from "@/components/ui/empty";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useAppContext } from "@/hooks/use-app-context";
-import { DEFAULT_RECON_RULES } from "@/lib/engine/rules";
 import { HelpCircle, PlusIcon, SquareFunction } from "lucide-react";
 
 export default function Page() {
@@ -41,9 +41,22 @@ export default function Page() {
           </ReconRuleDialog>
         }
       />
+
+      {reconRules.length === 0 && (
+        <Empty>
+          <EmptyContent>
+            <EmptyTitle>
+              You have no rules yet. Create a new rule to start reconciliation.
+            </EmptyTitle>
+          </EmptyContent>
+        </Empty>
+      )}
+
       <div className="space-y-8 flex min-h-[90%] flex-col items-center">
-        <div className="absolute left-[50%] w-px h-[80vh] flex-1 border border-dashed" />
-        {[...DEFAULT_RECON_RULES, ...reconRules].map((rule, index) => (
+        {reconRules.length > 0 && (
+          <div className="absolute left-[50%] w-px h-[80vh] flex-1 border border-dashed" />
+        )}
+        {reconRules.map((rule, index) => (
           <Card key={index} className="relative w-125">
             <CardContent>
               <CardHeader>

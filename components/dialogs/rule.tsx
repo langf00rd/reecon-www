@@ -60,7 +60,7 @@ export default function ReconRuleDialog(props: { children: ReactNode }) {
         enabled,
         description,
         conditions: conditions,
-        priority: 0,
+        priority: 1,
       },
     ]);
     setOpen(false);
@@ -73,15 +73,17 @@ export default function ReconRuleDialog(props: { children: ReactNode }) {
       toast.error("Please select field and operator");
       return;
     }
+
     if (!currentCondition?.right && !currentCondition?.value) {
       toast.error("Please select a field or enter a value");
       return;
     }
+
     setConditions([
       ...conditions,
       currentCondition as CanonicalReconRuleCondition,
     ]);
-    setCurrentCondition(null);
+    // setCurrentCondition(null);
     setIsEnteringValue(false);
   }
 
@@ -229,6 +231,7 @@ function KeySelect(props: {
     amount: 0,
     created_dt: "",
     reference: "",
+    currency: "",
   };
   const keys = Object.keys(canonicalTransaction);
   return (

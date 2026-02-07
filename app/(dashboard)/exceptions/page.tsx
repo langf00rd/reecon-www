@@ -28,7 +28,6 @@ import {
 } from "@/components/ui/select";
 import { useAppContext } from "@/hooks/use-app-context";
 import { RECON_STATUS_DEFS } from "@/lib/content";
-import { DEFAULT_RECON_RULES } from "@/lib/engine/rules";
 import { ReconResultStatus } from "@/lib/enums";
 import { Check, HelpCircle, Info, Search } from "lucide-react";
 import { useState } from "react";
@@ -162,19 +161,14 @@ export default function Home() {
                   <HoverCard openDelay={100} closeDelay={200}>
                     <HoverCardTrigger>
                       <p className="flex cursor-help items-center gap-1">
-                        {
-                          [...DEFAULT_RECON_RULES, ...reconRules].find(
-                            (rule) => rule.id === item.rule,
-                          )?.name
-                        }
+                        {reconRules.find((rule) => rule.id === item.rule)?.name}
                         <HelpCircle size={14} className="opacity-50" />
                       </p>
                     </HoverCardTrigger>
                     <HoverCardContent>
                       {
-                        [...DEFAULT_RECON_RULES, ...reconRules].find(
-                          (rule) => rule.id === item.rule,
-                        )?.description
+                        reconRules.find((rule) => rule.id === item.rule)
+                          ?.description
                       }
                     </HoverCardContent>
                   </HoverCard>

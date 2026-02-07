@@ -39,6 +39,7 @@ export default function NormalizationDialog(props: {
     created_dt: "",
     id: "",
     reference: "",
+    currency: "",
   };
 
   function handleNormalization() {

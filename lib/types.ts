@@ -16,30 +16,47 @@ export interface CanonicalTransaction {
 }
 
 export interface ReconResult {
-  internal: CanonicalTransaction;
+  internal?: CanonicalTransaction;
   provider?: CanonicalTransaction;
   status: ReconResultStatus;
   rule?: ReconRule["name"];
+  candidates?: string[];
 }
 
 export interface XlsxResult {
   [key: string]: Record<string, unknown>[];
 }
 
-export interface ReconRule extends Partial<CanonicalReconRule> {
-  formula?: string;
-  buildKey: (tx: CanonicalTransaction) => string | null;
-  match: (a: CanonicalTransaction, b: CanonicalTransaction) => boolean;
-}
+// export interface ReconRule extends Partial<CanonicalReconRule> {
+//   formula?: string;
+//   buildKey: (tx: CanonicalTransaction) => string | null;
+//   match: (a: CanonicalTransaction, b: CanonicalTransaction) => boolean;
+// }
 
-export interface CanonicalReconRule {
+export interface ReconRule {
   id: string;
   name: string;
   description?: string;
-  priority: number;
+  priority: number; // lower = stricter
   enabled: boolean;
-  conditions: CanonicalReconRuleCondition[];
+  conditions: RuleCondition[];
 }
+
+export interface RuleCondition {
+  left: keyof CanonicalTransaction;
+  operator: ReconRuleOperator;
+  right?: keyof CanonicalTransaction;
+  value?: string | number;
+}
+
+// export interface CanonicalReconRule {
+//   id: string;
+//   name: string;
+//   description?: string;
+//   priority: number;
+//   enabled: boolean;
+//   conditions: CanonicalReconRuleCondition[];
+// }
 
 export interface CanonicalReconRuleCondition {
   left: keyof CanonicalTransaction;

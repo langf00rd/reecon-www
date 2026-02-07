@@ -9,10 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Empty, EmptyContent, EmptyTitle } from "@/components/ui/empty";
 import { useAppContext } from "@/hooks/use-app-context";
-import {
-  convertCanonicalReconRulesToReconRules,
-  reconcile,
-} from "@/lib/engine/reconcile";
+import { reconcile } from "@/lib/engine/reconcile";
 import { TransactionType } from "@/lib/enums";
 import { ROUTES } from "@/lib/routes";
 import { CanonicalTransaction } from "@/lib/types";
@@ -73,24 +70,24 @@ export default function Page() {
   }
 
   function handleRunRecon() {
-    if (
-      normalizedData.internal.length === 0 ||
-      normalizedData.provider.length === 0
-    ) {
-      toast.error(
-        "Please upload and normalize both internal and provider files",
-      );
-      return;
+    try {
+      if (
+        normalizedData.internal.length === 0 ||
+        normalizedData.provider.length === 0
+      ) {
+        toast.error(
+          "Please upload and normalize both internal and provider files",
+        );
+        return;
+      }
+      const internalData = normalizedData.internal;
+      const providerData = normalizedData.provider;
+      const reconResult = reconcile(internalData, providerData, reconRules);
+      setReconResult(reconResult);
+      router.push(ROUTES.exceptions);
+    } catch (err) {
+      toast.error((err as Error).message);
     }
-    const internalData = normalizedData.internal;
-    const providerData = normalizedData.provider;
-    const reconResult = reconcile(
-      internalData,
-      providerData,
-      convertCanonicalReconRulesToReconRules(reconRules),
-    );
-    setReconResult(reconResult);
-    router.push(ROUTES.exceptions);
   }
 
   return (
