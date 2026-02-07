@@ -3,11 +3,13 @@ import {
   Database,
   FolderSearch,
   Footprints,
+  Hash,
   LifeBuoy,
   PieChart,
   Settings2,
   ShieldAlert,
 } from "lucide-react";
+import { AppSidebarMenu } from "./types";
 
 export const ROUTES = {
   index: "/",
@@ -19,13 +21,14 @@ export const ROUTES = {
   support: "/support",
   docs: "/docs",
   overview: "/overview",
+  reconciliationRule: "/reconciliation/rules",
 };
 
-export const SIDEBAR_MENU = {
-  secondaryNav: [
+export const SIDEBAR_MENU: AppSidebarMenu = {
+  secondary: [
     {
       label: "Help & Support",
-      url: "#",
+      url: "mailto:langfordquarshie21@gmail.com",
       icon: LifeBuoy,
       enabled: false,
     },
@@ -54,6 +57,14 @@ export const SIDEBAR_MENU = {
       url: ROUTES.reconciliation,
       icon: FolderSearch,
       enabled: true,
+      children: [
+        {
+          label: "Rules",
+          url: ROUTES.reconciliationRule,
+          icon: Hash,
+          enabled: false,
+        },
+      ],
     },
     {
       label: "Exceptions",
@@ -73,5 +84,5 @@ export const SIDEBAR_MENU = {
       icon: Settings2,
       enabled: false,
     },
-  ] as const,
+  ],
 };

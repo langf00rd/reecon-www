@@ -25,9 +25,11 @@ import { Button } from "../ui/button";
 
 export default function NormalizationDialog(props: {
   keys: string[];
+  open: boolean;
   children: React.ReactNode;
   type: TransactionType;
   transactions: Record<string, unknown>[];
+  onOpenChange: (open: boolean) => void;
   onNormalizedData: (data: Partial<CanonicalTransaction>[]) => void;
 }) {
   const [map, setMap] = useState<{ [key: string]: string }>({});
@@ -51,17 +53,20 @@ export default function NormalizationDialog(props: {
   function handleNormalization() {
     const normalizedData = batchNormalize(map, props.transactions);
     props.onNormalizedData(normalizedData);
+    props.onOpenChange(false);
   }
 
   return (
-    <Dialog>
+    <Dialog open={props.open} onOpenChange={props.onOpenChange}>
       <DialogTrigger asChild>{props.children}</DialogTrigger>
       <DialogContent className="space-y-6">
         <DialogHeader className="border-b pb-4">
-          <DialogTitle>Match fields to canonical schema</DialogTitle>
+          <DialogTitle>
+            Match {props.type.toLowerCase()} file fields to canonical schema
+          </DialogTitle>
           <DialogDescription>
             This ensures that your data is consistent with the canonical schema
-            our platform understands. This step is crucial for producing valid
+            our system understands. This step is crucial for producing valid
             reconciliation results
           </DialogDescription>
         </DialogHeader>

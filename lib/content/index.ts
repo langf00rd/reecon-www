@@ -1,4 +1,4 @@
-import { ReconResultStatus } from "./enums";
+import { ReconResultStatus } from "../enums";
 
 export const RECON_STATUS_DEFS = {
   [ReconResultStatus.MATCHED]:

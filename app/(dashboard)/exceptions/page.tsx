@@ -4,7 +4,12 @@ import Header from "@/components/header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { Empty, EmptyContent, EmptyTitle } from "@/components/ui/empty";
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyTitle,
+} from "@/components/ui/empty";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -68,8 +73,10 @@ export default function Home() {
         </div>
       </div>
 
-      <p className="flex bg-neutral-200/40 border p-2 px-3 rounded-sm items-center gap-2">
-        <Info size={16} />
+      <p className="flex items-start bg-neutral-200/40 border p-2 px-3 rounded-sm gap-2">
+        <div className="relative top-1">
+          <Info size={16} />
+        </div>
         {RECON_STATUS_DEFS[selectedStatus]}
       </p>
 
@@ -77,6 +84,9 @@ export default function Home() {
         <Empty>
           <EmptyContent>
             <EmptyTitle>No data to display</EmptyTitle>
+            <EmptyDescription>
+              Run a recon job to generate exceptions you can view here.
+            </EmptyDescription>
           </EmptyContent>
         </Empty>
       )}

@@ -14,7 +14,7 @@ import { TransactionType } from "@/lib/enums";
 import { ROUTES } from "@/lib/routes";
 import { CanonicalTransaction } from "@/lib/types";
 import { buildColumns, readExcelFile } from "@/lib/utils";
-import { RefreshCcw, Trash2 } from "lucide-react";
+import { RefreshCcw, SpellCheck } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { toast } from "sonner";
@@ -25,8 +25,8 @@ interface FileContent {
 }
 
 export default function Page() {
-  const { setReconResult } = useAppContext();
   const router = useRouter();
+  const { setReconResult } = useAppContext();
   const internalFilePickerRef = useRef<HTMLInputElement>(null);
   const providerFilePickerRef = useRef<HTMLInputElement>(null);
   const [filesContent, setFilesContent] = useState({
@@ -36,6 +36,10 @@ export default function Page() {
   const [normalizedData, setNormalizedData] = useState({
     internal: [] as CanonicalTransaction[],
     provider: [] as CanonicalTransaction[],
+  });
+  const [isNormalizationDialogOpen, setIsNormalizationDialogOpen] = useState({
+    internal: false,
+    provider: false,
   });
 
   const allFilesSelected =
@@ -79,7 +83,6 @@ export default function Page() {
     const providerData = normalizedData.provider;
     const reconResult = reconcile(internalData, providerData);
     setReconResult(reconResult);
-    console.log(reconResult);
     router.push(ROUTES.exceptions);
   }
 
@@ -97,6 +100,11 @@ export default function Page() {
               ref={internalFilePickerRef}
               onChange={() => {
                 handleUploadFile("internal");
+                // show internal normalization dialog
+                setIsNormalizationDialogOpen({
+                  ...isNormalizationDialogOpen,
+                  internal: true,
+                });
               }}
             />
             <input
@@ -107,6 +115,11 @@ export default function Page() {
               ref={providerFilePickerRef}
               onChange={() => {
                 handleUploadFile("provider");
+                // show provider normalization dialog
+                setIsNormalizationDialogOpen({
+                  ...isNormalizationDialogOpen,
+                  provider: true,
+                });
               }}
             />
             <div className="space-x-4">
@@ -150,6 +163,13 @@ export default function Page() {
                     {content.fileName}
                   </Badge>
                   <NormalizationDialog
+                    open={isNormalizationDialogOpen[key]}
+                    onOpenChange={(a) =>
+                      setIsNormalizationDialogOpen({
+                        ...isNormalizationDialogOpen,
+                        [key]: a,
+                      })
+                    }
                     type={key.toUpperCase() as TransactionType}
                     keys={Object.keys(content.data[0])}
                     transactions={content.data}
@@ -165,12 +185,12 @@ export default function Page() {
                       className="bg-white border shadow-xs"
                       variant="secondary"
                     >
-                      Normalize fields
+                      <SpellCheck /> Normalize fields
                     </Button>
                   </NormalizationDialog>
-                  <Button size="icon-xs" variant="destructive-secondary">
+                  {/*<Button size="icon-xs" variant="destructive-secondary">
                     <Trash2 />
-                  </Button>
+                  </Button>*/}
                 </div>
               </CardHeader>
               <CardContent className="border-t -mt-6 pt-5">

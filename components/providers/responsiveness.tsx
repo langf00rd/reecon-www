@@ -15,7 +15,9 @@ export const ResponsivenessProvider = ({
   if (isMobile) {
     return (
       <div className="w-screen flex-col gap-4 h-screen flex items-center justify-center">
-        <p className="text-xl">Please use a larger device to use this app.</p>
+        <p className="text-xl">
+          Please switch to a larger device to use this app.
+        </p>
         <Link href={ROUTES.index}>
           <Button>Go home</Button>
         </Link>

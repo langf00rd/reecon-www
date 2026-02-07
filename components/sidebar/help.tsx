@@ -1,8 +1,8 @@
 "use client";
 
 import { useHelpSidebar } from "@/hooks/use-help-sidebar";
+import { EXCEPTIONS_HELP, RECON_HELP } from "@/lib/content/help";
 import { HelpSidebarKeys } from "@/lib/enums";
-import { RECON_HELP } from "@/lib/help";
 import { ROUTES } from "@/lib/routes";
 import { motion } from "motion/react";
 import { usePathname } from "next/navigation";
@@ -15,6 +15,7 @@ export default function HelpSidebar() {
 
   function getHelpData() {
     if (pathname === ROUTES.reconciliation) return RECON_HELP;
+    if (pathname === ROUTES.exceptions) return EXCEPTIONS_HELP;
     return [];
   }
 
@@ -39,7 +40,7 @@ export default function HelpSidebar() {
     >
       <div>
         <div className="border-b p-7 py-4">
-          <h3 className="font-medium!">How does it work?</h3>
+          <h3 className="font-medium!">How it works</h3>
         </div>
         <div className="p-7">
           <ul className="space-y-5">
@@ -49,7 +50,7 @@ export default function HelpSidebar() {
                   <a.icon size={22} className="text-primary" />
                 </div>
                 <div className="relative -top-1 text-sm">
-                  <h4>{a.title}</h4>
+                  <h4 className="capitalize">{a.title.toLowerCase()}</h4>
                   <p>
                     <Balancer>{a.description}</Balancer>
                   </p>
