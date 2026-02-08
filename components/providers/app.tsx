@@ -1,16 +1,36 @@
 "use client";
 
 import { ReconResultStatus } from "@/lib/enums";
-import { ReconResult, ReconRule } from "@/lib/types";
+import { CanonicalTransaction, ReconResult, ReconRule } from "@/lib/types";
 import { createContext, ReactNode, useState } from "react";
 
 export const AppContext = createContext<ReturnType<
   typeof useAppContextValue
 > | null>(null);
 
+interface FileContent {
+  data: Record<string, unknown>[];
+  fileName: string;
+}
+
 const useAppContextValue = () => {
   const [reconRules, setReconRules] = useState<ReconRule[]>([]);
   const [reconResult, setReconResult] = useState<ReconResult[] | null>([]);
+  const [filesContent, setFilesContent] = useState({
+    internal: {} as FileContent,
+    provider: {} as FileContent,
+  });
+  const [normalizedData, setNormalizedData] = useState({
+    internal: [] as CanonicalTransaction[],
+    provider: [] as CanonicalTransaction[],
+  });
+  const [isNormalizationDialogOpen, setIsNormalizationDialogOpen] = useState({
+    internal: false,
+    provider: false,
+  });
+
+  const allFilesSelected =
+    !!filesContent.internal.fileName && !!filesContent.provider.fileName;
 
   function getGroupedReconResults() {
     const grouped = reconResult?.reduce(
@@ -32,6 +52,13 @@ const useAppContextValue = () => {
     reconRules,
     enabledReconRules: reconRules.filter((rule) => rule.enabled),
     setReconRules,
+    normalizedData,
+    setNormalizedData,
+    isNormalizationDialogOpen,
+    setIsNormalizationDialogOpen,
+    allFilesSelected,
+    setFilesContent,
+    filesContent,
   };
 };
 

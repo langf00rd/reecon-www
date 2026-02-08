@@ -242,7 +242,6 @@ function KeySelect(props: {
   const keys = Object.keys(canonicalTransaction);
   return (
     <Select
-      required
       onValueChange={(value) =>
         props.onChange(value as keyof CanonicalTransaction)
       }
@@ -267,7 +266,6 @@ function OperatorSelect(props: {
   const keys = Object.keys(ReconRuleOperator);
   return (
     <Select
-      required
       onValueChange={(value) => props.onChange(value as ReconRuleOperator)}
     >
       <SelectTrigger className="w-full bg-white">

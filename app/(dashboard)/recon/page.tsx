@@ -20,38 +20,28 @@ import { useAppContext } from "@/hooks/use-app-context";
 import { reconcile } from "@/lib/engine/reconcile";
 import { TransactionType } from "@/lib/enums";
 import { ROUTES } from "@/lib/routes";
-import { CanonicalTransaction } from "@/lib/types";
 import { buildColumns, readExcelFile } from "@/lib/utils";
 import { PlusIcon, RefreshCcw, SpellCheck } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { toast } from "sonner";
-
-interface FileContent {
-  data: Record<string, unknown>[];
-  fileName: string;
-}
 
 export default function Page() {
   const router = useRouter();
-  const { setReconResult, reconRules, enabledReconRules } = useAppContext();
+  const {
+    normalizedData,
+    setNormalizedData,
+    isNormalizationDialogOpen,
+    setIsNormalizationDialogOpen,
+    allFilesSelected,
+    setFilesContent,
+    setReconResult,
+    reconRules,
+    filesContent,
+    enabledReconRules,
+  } = useAppContext();
   const internalFilePickerRef = useRef<HTMLInputElement>(null);
   const providerFilePickerRef = useRef<HTMLInputElement>(null);
-  const [filesContent, setFilesContent] = useState({
-    internal: {} as FileContent,
-    provider: {} as FileContent,
-  });
-  const [normalizedData, setNormalizedData] = useState({
-    internal: [] as CanonicalTransaction[],
-    provider: [] as CanonicalTransaction[],
-  });
-  const [isNormalizationDialogOpen, setIsNormalizationDialogOpen] = useState({
-    internal: false,
-    provider: false,
-  });
-
-  const allFilesSelected =
-    !!filesContent.internal.fileName && !!filesContent.provider.fileName;
 
   async function handleUploadFile(type: "internal" | "provider") {
     try {
