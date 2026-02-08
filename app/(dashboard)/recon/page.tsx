@@ -172,10 +172,10 @@ export default function Page() {
       <div className="space-y-10">
         {allFilesSelected && enabledReconRules.length === 0 && (
           <HelpMessage className="bg-destructive/5 items-center justify-between text-destructive/60 border-destructive/5">
-            No recon rules created. Please create and enable at least one rule
-            to run this recon job
+            No matching rules found. Create at least one active rule to tell the
+            system how transactions should be matched.
             <ReconRuleDialog>
-              <Button variant="secondary">
+              <Button variant="secondary" className="bg-white">
                 <PlusIcon />
                 New rule
               </Button>
@@ -221,7 +221,7 @@ export default function Page() {
           return (
             <Card key={key} className="pt-0">
               <CardHeader className="h-14 rounded-t-xl flex bg-background items-center justify-between">
-                <CardTitle className="capitalize p-0">{key} Ledger</CardTitle>
+                <CardTitle className="capitalize p-0">{key} File</CardTitle>
                 <div className="flex items-center gap-2">
                   <Badge className="bg-white text-foreground border border-black/20 shadow-xs">
                     {content.fileName}

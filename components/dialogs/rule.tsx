@@ -17,6 +17,7 @@ import { PlusIcon, XIcon } from "lucide-react";
 import { ReactNode, useState } from "react";
 import { toast } from "sonner";
 import { HorizontalDashedLine } from "../dashed-line";
+import HelpMessage from "../help-message";
 import { Button } from "../ui/button";
 import { Checkbox } from "../ui/checkbox";
 import { Input } from "../ui/input";
@@ -97,9 +98,10 @@ export default function ReconRuleDialog(props: { children: ReactNode }) {
       <DialogTrigger>{props.children}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>New Recon Rule</DialogTitle>
+          <DialogTitle>Create reconciliation rule</DialogTitle>
           <DialogDescription>
-            This rule will be applied to reconciliations
+            Define how internal transactions should be matched against provider
+            records during reconciliation
           </DialogDescription>
         </DialogHeader>
         <form className="space-y-8" onSubmit={handleSave}>
@@ -117,7 +119,6 @@ export default function ReconRuleDialog(props: { children: ReactNode }) {
               <Switch name="enabled" />
             </fieldset>
           </div>
-
           <fieldset className="flex gap-2 flex-col">
             <Label>Conditions</Label>
 
@@ -125,9 +126,9 @@ export default function ReconRuleDialog(props: { children: ReactNode }) {
             <div className="flex items-center justify-between">
               <small className="pr-2">Internal field</small>
               <HorizontalDashedLine />
-              <small className="pr-2">Operator</small>
+              <small className="pr-2">Match condition</small>
               <HorizontalDashedLine />
-              <small className="pr-2">Provider field/value</small>
+              <small className="pr-2">Provider field / value</small>
             </div>
 
             {conditions.length > 0 && (
@@ -215,6 +216,10 @@ export default function ReconRuleDialog(props: { children: ReactNode }) {
               <PlusIcon /> Add Condition
             </Button>
           </fieldset>
+          <HelpMessage>
+            All conditions in a rule must be met for a transaction to be
+            considered a match
+          </HelpMessage>
           <DialogFooter>
             <Button>Save rule</Button>
           </DialogFooter>

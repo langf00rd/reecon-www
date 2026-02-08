@@ -54,12 +54,12 @@ export default function NormalizationDialog(props: {
       <DialogContent className="space-y-6">
         <DialogHeader className="border-b pb-4">
           <DialogTitle>
-            Match {props.type.toLowerCase()} file fields to canonical schema
+            Match {props.type.toLowerCase()} file fields to our standard fields
           </DialogTitle>
           <DialogDescription>
-            This ensures that your data is consistent with the canonical schema
-            our system understands. This step is crucial for producing valid
-            reconciliation results
+            Tell us which columns in your file represent amounts, references,
+            dates, and other details. This step ensures transactions from
+            different sources can be compared accurately during reconciliation
           </DialogDescription>
         </DialogHeader>
         <form className="space-y-4">
@@ -89,9 +89,9 @@ export default function NormalizationDialog(props: {
           <div className="space-y-2">
             <h3>Preview</h3>
             <div className="flex items-center justify-between">
-              <small className="pr-2">Our system</small>
+              <small className="pr-2">Standard field</small>
               <div className="w-full flex-1 border border-dashed" />
-              <small className="pr-2">Your uploaded file</small>
+              <small className="pr-2">Source file column</small>
             </div>
             <ul className="bg-white space-y-2 p-4 rounded-md h-fit shadow-xs border">
               {Object.entries(map).map(([key, value]) => (
