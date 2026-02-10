@@ -1,14 +1,11 @@
-import { ContainerScroll } from "@/components/animation/container-scroll-animation";
 import { DemoEmailCollectionDialog } from "@/components/dialogs/demo-email-collection";
 import Hero from "@/components/landing/hero";
-import HeroBackground from "@/components/landing/hero-bg";
 import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/lib/routes";
 import {
   ChevronRight,
   FolderSymlink,
-  HomeIcon,
   ScrollText,
   ShieldCheck,
 } from "lucide-react";
@@ -53,8 +50,9 @@ export default async function Home() {
           <div className="px-10 py-32 max-w-[1200px] flex-col mx-auto flex justify-center h-full">
             <p className="text-[2rem] md:text-[4.5rem] leading-[1.35]! text-black font-[450]">
               <Balancer>
-                Most fintech teams waste hours every day manually checking
-                transactions across banks, telcos, and payment providers...
+                Finance and operations teams spend hours reconciling thousands
+                of transactions across banks, mobile money operators, and
+                payment providers—often using spreadsheets and manual checks...
               </Balancer>
             </p>
           </div>

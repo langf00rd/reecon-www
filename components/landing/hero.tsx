@@ -1,14 +1,14 @@
 "use client";
 
-import Balancer from "react-wrap-balancer";
-import HeroBackground from "./hero-bg";
-import { DemoEmailCollectionDialog } from "../dialogs/demo-email-collection";
-import { Button } from "../ui/button";
-import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect } from "react";
+import Balancer from "react-wrap-balancer";
+import { DemoEmailCollectionDialog } from "../dialogs/demo-email-collection";
+import { Button } from "../ui/button";
+import HeroBackground from "./hero-bg";
 
 export default function Hero(props: { hasFilledEarlyAccessForm?: boolean }) {
   useEffect(() => {
@@ -56,12 +56,13 @@ export default function Hero(props: { hasFilledEarlyAccessForm?: boolean }) {
       <HeroBackground />
       <div className="relative w-full h-full flex items-center justify-center flex-col gap-8 md:text-center">
         <h1 className="text-[2.2rem] md:text-[5rem] md:leading-[1.2] max-w-250">
-          <Balancer>Transaction Reconciliation Minus the Chaos</Balancer>
+          <Balancer>An Enterprise Transaction Reconciliation Software</Balancer>
         </h1>
         <p className="text-xl md:text-[1.5rem] max-w-200">
           <Balancer>
-            A fintech reconciliation tool built for high-volume payments. No
-            spreadsheets. No guesswork. No late nights.
+            Automatically match internal transactions with bank, telco, and PSP
+            statements. Identify and isolate unmatched records, and reconcile
+            faster without manual checks leading to errors and oversight
           </Balancer>
         </p>
         <div className="flex md:flex-row w-full md:w-fit md:items-center mt-4 gap-4 md:gap-12">
