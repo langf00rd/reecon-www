@@ -423,6 +423,21 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
   } | null>(null);
 
   useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        visibilityRef.current.visible = entry.isIntersecting;
+      },
+      { threshold: 0.01 },
+    );
+
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
     speedRef.current = speed;
