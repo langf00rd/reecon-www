@@ -41,19 +41,19 @@ export function readExcelFile(file: File): Promise<XlsxResult> {
  */
 export function buildColumns(data: Record<string, unknown>[]) {
   const columns: ColumnDef<Record<string, unknown>, unknown>[] = [];
-
   const indexObject = data[0];
   if (!indexObject) return columns;
-
   const keys = Object.keys(indexObject);
   Array.from(keys).forEach((key) => {
-    if (key.toLowerCase() === 'raw') return;
+    if (key.toLowerCase() === "raw") return;
     columns.push({
       accessorKey: key,
-      header: key.replaceAll('_', " ").toLowerCase(),
+      header: key.replaceAll("_", " ").toLowerCase(),
+      cell: ({ row }) => {
+        return row.getValue(key) || "--";
+      },
     });
   });
-
 
   return columns;
 }

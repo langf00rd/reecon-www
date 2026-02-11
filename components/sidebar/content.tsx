@@ -1,7 +1,7 @@
 "use client";
 
 import { SIDEBAR_MENU } from "@/lib/routes";
-import { ChevronRight, Search } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -9,7 +9,6 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "../ui/collapsible";
-import { Input } from "../ui/input";
 import {
   SidebarContent,
   SidebarGroup,
@@ -37,7 +36,7 @@ export default function AppSidebarContent() {
             </SidebarGroupContent>
           </SidebarGroup>
         )}
-        {open && (
+        {/*{open && (
           <SidebarGroup>
             <SidebarGroupContent>
               <Input
@@ -46,8 +45,8 @@ export default function AppSidebarContent() {
               />
             </SidebarGroupContent>
           </SidebarGroup>
-        )}
-        <SidebarMenu className="space-y-2">
+        )}*/}
+        <SidebarMenu className="space-y-2 mt-10">
           {SIDEBAR_MENU.main.map((a) =>
             a.children ? (
               <Collapsible key={a.label} className="group/collapsible">

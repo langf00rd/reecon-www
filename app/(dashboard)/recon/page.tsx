@@ -249,6 +249,7 @@ export default function Page() {
               </CardHeader>
               <CardContent className="border-t -mt-4 pt-5">
                 <DataTable
+                  searchKey="transaction_id"
                   data={content.data}
                   columns={buildColumns(content.data)}
                 />

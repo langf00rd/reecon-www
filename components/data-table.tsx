@@ -1,4 +1,5 @@
 "use client";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -9,34 +10,43 @@ import {
 } from "@/components/ui/table";
 import {
   ColumnDef,
+  ColumnFiltersState,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  searchKey?: string;
 }
+
 export function DataTable<TData, TValue>({
   columns,
   data,
+  searchKey,
 }: DataTableProps<TData, TValue>) {
   const [tableWrapperWidth, setTableWrapperWidth] = useState(0);
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: 10,
   });
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const table = useReactTable({
     data,
     columns,
-    state: { pagination },
+    state: { pagination, columnFilters },
     onPaginationChange: setPagination,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
   });
 
   useEffect(() => {
@@ -54,6 +64,20 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="space-y-4" id="table-wrapper">
+      {searchKey && (
+        <div className="flex items-center py-4">
+          <Input
+            placeholder={`Search ${searchKey.replaceAll("_", " ")}s...`}
+            value={
+              (table.getColumn(searchKey)?.getFilterValue() as string) ?? ""
+            }
+            onChange={(event) =>
+              table.getColumn(searchKey)?.setFilterValue(event.target.value)
+            }
+            className="max-w-sm placeholder:capitalize"
+          />
+        </div>
+      )}
       <div
         className="overflow-scroll"
         style={{

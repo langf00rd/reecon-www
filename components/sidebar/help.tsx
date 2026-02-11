@@ -50,7 +50,9 @@ export default function HelpSidebar() {
                   <a.icon size={22} className="text-primary" />
                 </div>
                 <div className="relative -top-1 text-sm">
-                  <h4 className="capitalize">{a.title.toLowerCase()}</h4>
+                  <h4 className="capitalize">
+                    {a.title.replaceAll("_", " ").toLowerCase()}
+                  </h4>
                   <p>
                     <Balancer>{a.description}</Balancer>
                   </p>
