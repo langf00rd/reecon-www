@@ -11,8 +11,11 @@ export default function ButtonPopover(props: {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button className="pr-0" {...props.buttonProps}>
-          {props.label}
+        <Button className="pr-0" {...props.buttonProps} style={{
+          justifyContent: 'space-between',
+          ...props.buttonProps?.style
+        }}>
+          <span>{props.label}</span>
           <span className="border-l border-l-white/40 px-2 flex items-center justify-center">
             <ChevronDown />
           </span>

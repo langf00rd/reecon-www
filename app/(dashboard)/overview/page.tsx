@@ -1,15 +1,7 @@
-import Header from "@/components/header";
-import { Empty, EmptyContent, EmptyTitle } from "@/components/ui/empty";
+import { ROUTES } from "@/lib/routes";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return (
-    <>
-      <Header title="Welcome, Langford" />
-      <Empty>
-        <EmptyContent>
-          <EmptyTitle>Coming Soon...</EmptyTitle>
-        </EmptyContent>
-      </Empty>
-    </>
-  );
+  redirect(ROUTES.reconciliation)
+  return null
 }

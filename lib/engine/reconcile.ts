@@ -54,9 +54,9 @@ export function reconcile(
         key && index.has(key)
           ? index.get(key)!
           : providerTxs.filter(
-              (p) =>
-                !consumedProvider.has(p.id) && ruleMatches(rule, internal, p),
-            );
+            (p) =>
+              !consumedProvider.has(p.id) && ruleMatches(rule, internal, p),
+          );
 
       const viable = candidates.filter((p) => !consumedProvider.has(p.id));
 
@@ -89,7 +89,7 @@ export function reconcile(
 
       results.push({
         internal,
-        status: ReconResultStatus.AMBIGUOUS,
+        status: ReconResultStatus.MULTIPLE_MATCHES,
         rule: ambiguity.rule.id,
         candidates: ambiguity.providers.map((p) => p.id),
       });
@@ -100,7 +100,7 @@ export function reconcile(
     consumedInternal.add(internal.id);
     results.push({
       internal,
-      status: ReconResultStatus.MISSING,
+      status: ReconResultStatus.MISSING_FROM_PROVIDER,
     });
   }
 
@@ -109,7 +109,7 @@ export function reconcile(
     if (!consumedProvider.has(provider.id)) {
       results.push({
         provider,
-        status: ReconResultStatus.UNEXPECTED,
+        status: ReconResultStatus.EXTRA_IN_PROVIDER,
       });
     }
   }

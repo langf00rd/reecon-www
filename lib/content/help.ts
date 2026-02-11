@@ -50,18 +50,18 @@ export const EXCEPTIONS_HELP = [
     icon: CopyCheck,
   },
   {
-    title: `${ReconResultStatus.MISSING.toLowerCase()} records`,
-    description: RECON_STATUS_DEFS.MISSING,
+    title: `${ReconResultStatus.MISSING_FROM_PROVIDER.toLowerCase()} records`,
+    description: RECON_STATUS_DEFS.MISSING_FROM_PROVIDER,
     icon: FileXCorner,
   },
   {
-    title: `${ReconResultStatus.UNEXPECTED.toLowerCase()} records`,
-    description: RECON_STATUS_DEFS.UNEXPECTED,
+    title: `${ReconResultStatus.EXTRA_IN_PROVIDER.toLowerCase()} records`,
+    description: RECON_STATUS_DEFS.EXTRA_IN_PROVIDER,
     icon: FileQuestionMark,
   },
   {
-    title: `${ReconResultStatus.AMBIGUOUS.toLowerCase()} records`,
-    description: RECON_STATUS_DEFS.AMBIGUOUS,
+    title: `${ReconResultStatus.MULTIPLE_MATCHES.toLowerCase()} records`,
+    description: RECON_STATUS_DEFS.MULTIPLE_MATCHES,
     icon: FileSearchCorner,
   },
 ];

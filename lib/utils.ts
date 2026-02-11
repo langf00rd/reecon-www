@@ -47,11 +47,13 @@ export function buildColumns(data: Record<string, unknown>[]) {
 
   const keys = Object.keys(indexObject);
   Array.from(keys).forEach((key) => {
+    if (key.toLowerCase() === 'raw') return;
     columns.push({
       accessorKey: key,
-      header: key,
+      header: key.replaceAll('_', " ").toLowerCase(),
     });
   });
+
 
   return columns;
 }
